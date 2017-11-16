@@ -9,4 +9,10 @@
 /Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/main.c
 stdio.h
 -
+stdlib.h
+-
+string.h
+-
+math.h
+-
 

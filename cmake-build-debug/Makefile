@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named temporary_code
+# Target rules for targets named DataStructure_mission
 
 # Build rule for target.
-temporary_code: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 temporary_code
-.PHONY : temporary_code
+DataStructure_mission: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DataStructure_mission
+.PHONY : DataStructure_mission
 
 # fast build rule for target.
-temporary_code/fast:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/build
-.PHONY : temporary_code/fast
+DataStructure_mission/fast:
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/build
+.PHONY : DataStructure_mission/fast
 
 main.o: main.c.o
 
@@ -129,7 +129,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/main.c.o
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -138,7 +138,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/main.c.i
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -147,7 +147,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/main.c.s
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -158,7 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... temporary_code"
+	@echo "... DataStructure_mission"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

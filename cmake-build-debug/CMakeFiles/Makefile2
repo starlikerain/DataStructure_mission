@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataS
 CMAKE_BINARY_DIR = /Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/temporary_code.dir
+# Target rules for target CMakeFiles/DataStructure_mission.dir
 
 # All Build rule for target.
-CMakeFiles/temporary_code.dir/all:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/depend
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target temporary_code"
-.PHONY : CMakeFiles/temporary_code.dir/all
+CMakeFiles/DataStructure_mission.dir/all:
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/depend
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target DataStructure_mission"
+.PHONY : CMakeFiles/DataStructure_mission.dir/all
 
 # Include target in all.
-all: CMakeFiles/temporary_code.dir/all
+all: CMakeFiles/DataStructure_mission.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/temporary_code.dir/rule: cmake_check_build_system
+CMakeFiles/DataStructure_mission.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/temporary_code.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/DataStructure_mission.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/temporary_code.dir/rule
+.PHONY : CMakeFiles/DataStructure_mission.dir/rule
 
 # Convenience name for target.
-temporary_code: CMakeFiles/temporary_code.dir/rule
+DataStructure_mission: CMakeFiles/DataStructure_mission.dir/rule
 
-.PHONY : temporary_code
-
-# clean rule for target.
-CMakeFiles/temporary_code.dir/clean:
-	$(MAKE) -f CMakeFiles/temporary_code.dir/build.make CMakeFiles/temporary_code.dir/clean
-.PHONY : CMakeFiles/temporary_code.dir/clean
+.PHONY : DataStructure_mission
 
 # clean rule for target.
-clean: CMakeFiles/temporary_code.dir/clean
+CMakeFiles/DataStructure_mission.dir/clean:
+	$(MAKE) -f CMakeFiles/DataStructure_mission.dir/build.make CMakeFiles/DataStructure_mission.dir/clean
+.PHONY : CMakeFiles/DataStructure_mission.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/DataStructure_mission.dir/clean
 
 .PHONY : clean
 

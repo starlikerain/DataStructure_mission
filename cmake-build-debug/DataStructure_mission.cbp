@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="temporary_code"/>
+		<Option title="DataStructure_mission"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="temporary_code">
-				<Option output="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/temporary_code" prefix_auto="0" extension_auto="0"/>
+			<Target title="DataStructure_mission">
+				<Option output="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/DataStructure_mission" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -52,14 +52,14 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 temporary_code"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataStructure_mission"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="temporary_code/fast">
-				<Option output="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/temporary_code" prefix_auto="0" extension_auto="0"/>
+			<Target title="DataStructure_mission/fast">
+				<Option output="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/DataStructure_mission" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -73,7 +73,7 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 temporary_code/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 DataStructure_mission/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -81,7 +81,7 @@
 			</Target>
 		</Build>
 		<Unit filename="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/main.c">
-			<Option target="temporary_code"/>
+			<Option target="DataStructure_mission"/>
 		</Unit>
 		<Unit filename="/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

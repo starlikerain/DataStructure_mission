@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/main.c" "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles/temporary_code.dir/main.c.o"
+  "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/main.c" "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/cmake-build-debug/CMakeFiles/DataStructure_mission.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

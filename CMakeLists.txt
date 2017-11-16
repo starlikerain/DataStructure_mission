@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
-project(temporary_code)
+project(DataStructure_mission)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c main.c)
-add_executable(temporary_code ${SOURCE_FILES})
+set(SOURCE_FILES main.c)
+add_executable(DataStructure_mission ${SOURCE_FILES})

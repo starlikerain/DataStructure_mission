@@ -1,0 +1,13 @@
+6 6
+0 A A_beautiful_spot_A
+1 B A_beautiful_spot_B
+2 C A_beautiful_spot_C
+3 D A_beautiful_spot_D
+4 E A_beautiful_spot_E
+5 F A_beautiful_spot_F
+0 1 1
+1 2 2
+1 4 3
+2 3 6
+4 3 5
+4 5 4
