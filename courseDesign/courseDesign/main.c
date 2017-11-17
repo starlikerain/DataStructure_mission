@@ -1,10 +1,18 @@
+//
+//  main.c
+//  courseDesign
+//
+//  Created by StarLikeRain on 17/11/2017.
+//  Copyright © 2017 EvanYann. All rights reserved.
+//
 /**
  * @author [StarLikeRain]
  * @email [pengyaokang@gmail.com]
  * @create date 15/11/2017
  * @modify date 15/11/2017
  * @desc [学校数据结构任务书]
-*/
+ */
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -72,8 +80,17 @@ void school_single_spot_insert(int index, char alias, char profile[100], int pos
     }
 }
 
-void search_Spot(int i){
-
+void search_Spot() {
+    school_single_spot *p = head;
+    // i用于防止死循环
+    char mark,i=0;
+    puts("输入景点的单字符");
+    scanf("%c", &mark);
+    getchar();
+    while (p->alias != mark && i<7) {
+        p = p->next;
+    }
+    printf("对应的%c景点的信息是: %s \n", mark, p->describe);
 }
 
 /*
@@ -93,11 +110,10 @@ void create(Mgraph *g, char *s) {
     if (rf) {
         fscanf(rf, "%d %d", &g->n, &g->e); // 读图 「定点」和 「边」 信息
         for (i = 0; i < g->n; i++) {
-            printf("i >>> %d \n", i);
             fscanf(rf, "%d %c %s", &index, &alias, &profile, i); // i用于插入的pos
             school_single_spot_insert(index, alias, profile, i);
         }
-
+        
     } else {
         g->n = 0;
         printf("create 文件读取失败呀");
@@ -128,20 +144,30 @@ void school_spot_display() {
 int menu() {
     int inputNum = 0;
     printf("******* GUI 选择界面 *******\n");
+    printf("        A \n");
+    printf("        | \n");
+    printf("        B —— E —— F\n");
+    printf("        |    |\n");
+    printf("        C —— D\n");
     puts("1、显示所有节点信息\n");
+    puts("2、查询各个景点的相关信息\n");
+    puts("3、查询任意两个景点的最短路径\n");
+    puts("4、查询两个景点的所有路径\n");
+    puts("0、退出程序\n");
+    
     scanf("%d", &inputNum);
     getchar();
     return inputNum;
 }
 
-int main() {
+void main() {
     Mgraph *my_graph;
     char file_Path[] = "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/School_map.txt";
     init_school_sequence_head();
     create(&my_graph, file_Path);
-
+    
     int switchCase = 1;
-    int CustomerOperator = 1;
+    int CustomerOperator;
     while (switchCase) {
         CustomerOperator = menu();
         switch (CustomerOperator) {
@@ -149,18 +175,21 @@ int main() {
                 school_spot_display();
                 break;
             case 2:
-
+                search_Spot();
                 break;
+            case 0:
+                puts("退出程序ing");
+                sleep(2);
+                puts("已退出!");
+                exit(1);
             default:
                 printf("你为何要输入一个奇怪得数字！\n");
                 break;
         }
     }
-
-
-    printf("hello world");
-    return 0;
 }
+
+
 
 
 
