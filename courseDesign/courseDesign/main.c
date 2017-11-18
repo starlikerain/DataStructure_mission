@@ -18,8 +18,9 @@
 #include <string.h>
 #include <math.h>
 
-#define FINITY 5000                                   /*表示无穷大*/
-#define M 20
+#define MAX         100                                 // 矩阵最大容量
+#define INF (~(0x1<<31))                                  /*表示走不通*/
+#define M 10
 typedef int datatype;
 typedef char vertextype;
 typedef int edgetype;
@@ -99,6 +100,7 @@ void search_Spot() {
  * read file and create sequence & graph
  */
 void create(Mgraph *g, char *s) {
+    char each_ABCDEF;
     int i, j, k, w;
     // 下面声明的变量用于 school_single_spot
     int index;
@@ -109,15 +111,51 @@ void create(Mgraph *g, char *s) {
     rf = fopen(s, "r");
     if (rf) {
         fscanf(rf, "%d %d", &g->n, &g->e); // 读图 「定点」和 「边」 信息
+        fseek(rf, 1L, SEEK_CUR);
+        // 做一些 graph 的 vex[M] 字母赋值
+        for(i=0; i< g->n; i++){
+            fscanf(rf, "%c", &each_ABCDEF);
+            g->vexs[i] = each_ABCDEF;
+            fseek(rf, 1L, SEEK_CUR);
+        }
+       // fseek(rf, 1L, SEEK_CUR);
         for (i = 0; i < g->n; i++) {
             fscanf(rf, "%d %c %s", &index, &alias, &profile, i); // i用于插入的pos
             school_single_spot_insert(index, alias, profile, i);
         }
-        
+        for(i=0;i<g->n;i++){  // 初始化邻接矩阵
+            for(j=0;j<g->n;j++){
+                if(j == i){
+                    g->edges[i][j] = 0;
+                }else{
+                    g->edges[i][j] = INF;
+                }
+            }
+        }
+        for(k=0;k<g->e;k++){ // 读取网格的边信息
+            fscanf(rf, "%d %d %d", &i, &j, &w); // 0 1 1
+            g->edges[i][j] = w;
+            g->edges[j][i] = w; // 因为是无向图，所以双向赋值
+        }
     } else {
         g->n = 0;
         printf("create 文件读取失败呀");
     }
+    
+    /*
+     * 看一下矩阵
+     */
+    int xx,yy;
+    printf("________________________________________________________________________________________\n");
+    printf("       /*A*/          /*B*/          /*C*/          /*D*/          /*E*/          /*F*/ \n");
+    for(xx=0;xx<6;xx++){
+        printf("/*%c*/  ", g->vexs[xx]);
+        for(yy=0;yy<6;yy++){
+            printf("%-15d", g->edges[xx][yy]);
+        }
+        printf("\n");
+    }
+    printf("________________________________________________________________________________________\n");
     fclose(rf);
 }
 
@@ -137,6 +175,8 @@ void school_spot_display() {
         puts("显示完毕\n");
     }
 }
+
+
 
 /*
  * 用户 GUI 选择界面
@@ -160,13 +200,89 @@ int menu() {
     return inputNum;
 }
 
-void main() {
+
+
+// 邻接矩阵
+//typedef struct _graph
+//{
+//    char vexs[MAX];       // 顶点集合
+//    int vexnum;           // 顶点数
+//    int edgnum;           // 边数
+//    int matrix[MAX][MAX]; // 邻接矩阵
+//}Graph, *PGraph;
+
+void dijkstra(Mgraph *G, int vs, int p, int prev[], int dist[]){
+    int i,j,k;
+    int min;
+    int tmp;
+    int flag[MAX];      // flag[i]=1表示"顶点vs"到"顶点i"的最短路径已成功获取。
+    
+    // 初始化
+    for (i = 0; i < G->n; i++)
+    {
+        flag[i] = 0;              // 顶点i的最短路径还没获取到。
+        prev[i] = 0;              // 顶点i的前驱顶点为0。
+        dist[i] = G->edges[vs][i];// 顶点i的最短路径为"顶点vs"到"顶点i"的权。
+    }
+    
+    // 对"顶点vs"自身进行初始化
+    flag[vs] = 1;
+    dist[vs] = 0;
+    
+    // 遍历G.vexnum-1次；每次找出一个顶点的最短路径。
+    for (i = 1; i < G->n; i++)
+    {
+        // 寻找当前最小的路径；
+        // 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。
+        min = INF;
+        for (j = 0; j < G->n; j++)
+        {
+            if (flag[j]==0 && dist[j]<min)
+            {
+                min = dist[j];
+                k = j;
+            }
+        }
+        // 标记"顶点k"为已经获取到最短路径
+        flag[k] = 1;
+        
+        // 修正当前最短路径和前驱顶点
+        // 即，当已经"顶点k的最短路径"之后，更新"未获取最短路径的顶点的最短路径和前驱顶点"。
+        for (j = 0; j < G->n; j++)
+        {
+            tmp = (G->edges[k][j]==INF ? INF : (min + G->edges[k][j])); // 防止溢出
+            if (flag[j] == 0 && (tmp  < dist[j]) )
+            {
+                dist[j] = tmp;
+                prev[j] = k;
+            }
+        }
+    }
+    
+    // 打印dijkstra最短路径的结果
+    printf("dijkstra(%c): \n", G->vexs[vs]);
+    for (i = 0; i < G->n; i++)
+        printf("  shortest(%c, %c)=%d\n", G->vexs[vs], G->vexs[i], dist[i]);
+}
+// 邻接矩阵
+//typedef struct _graph
+//{
+//    char vexs[MAX];       // 顶点集合
+//    int vexnum;           // 顶点数
+//    int edgnum;           // 边数
+//    int matrix[MAX][MAX]; // 邻接矩阵
+//}Graph, *PGraph;
+
+
+int main() {
+    int prev[MAX] = {0}; // 还没想好等下 吧
+    int dist[MAX] = {0}; // 用于 dijkstra 输出存储
     Mgraph *my_graph;
     char file_Path[] = "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/School_map.txt";
     init_school_sequence_head();
     create(&my_graph, file_Path);
     
-    int switchCase = 1;
+    int switchCase = 1, i, p;
     int CustomerOperator;
     while (switchCase) {
         CustomerOperator = menu();
@@ -177,9 +293,15 @@ void main() {
             case 2:
                 search_Spot();
                 break;
+            case 3:
+                puts("输入你想查询的两个点的 index （ 用空格隔开 ）");
+                scanf("%d %d", &i,&p);
+                getchar();
+                dijkstra(&my_graph, i, p, prev, dist);
+                break;
             case 0:
                 puts("退出程序ing");
-                sleep(2);
+                sleep(1);
                 puts("已退出!");
                 exit(1);
             default:
@@ -187,6 +309,7 @@ void main() {
                 break;
         }
     }
+    return 0;
 }
 
 
