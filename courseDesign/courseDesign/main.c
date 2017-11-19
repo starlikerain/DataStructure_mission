@@ -25,11 +25,17 @@ typedef int datatype;
 typedef char vertextype;
 typedef int edgetype;
 
+// 定一个 flag 队列
+typedef struct javaScriptObj{
+    char vex[M];
+} js_Obj;
+
 typedef struct {
     vertextype vexs[M];
     edgetype edges[M][M];
     int n, e;                                           /*顶点数 && 边数*/
 } Mgraph;
+
 
 typedef struct link_node {
     int index;
@@ -178,17 +184,175 @@ void school_spot_display() {
 
 
 
+// 邻接矩阵
+//typedef struct _graph
+//{
+//    char vexs[MAX];       // 顶点集合
+//    int vexnum;           // 顶点数
+//    int edgnum;           // 边数
+//    int matrix[MAX][MAX]; // 邻接矩阵
+//}Graph, *PGraph;
+
+void dijkstra(Mgraph *G, int vs, int p, int prev[], int dist[]){
+    char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+    js_Obj* js_obj;
+    //    Graph* pG;
+    int useless=0;
+    int i,j,k;
+    int min;
+    int tmp;
+    int flag[MAX];      // flag[i]=1表示"顶点vs"到"顶点i"的最短路径已成功获取。
+    js_obj = (js_Obj*)malloc(sizeof(js_Obj));
+    memset(js_obj, 0, sizeof(js_Obj));
+    
+    
+    // 初始化
+    for (i = 0; i < G->n; i++)
+    {
+        flag[i] = 0;              // 顶点i的最短路径还没获取到。
+        prev[i] = 0;              // 顶点i的前驱顶点为0。
+        dist[i] = G->edges[vs][i];// 顶点i的最短路径为"顶点vs"到"顶点i"的权。
+    }
+    
+    
+    
+    // 对"顶点vs"自身进行初始化
+    flag[vs] = 1;
+
+    js_obj->vex[useless] = vexs[vs];
+    useless++;
+    dist[vs] = 0;
+    
+    // 遍历G.vexnum-1次；每次找出一个顶点的最短路径。
+    for (i = 1; i < G->n; i++) // 1~5
+    {
+        printf("这里:%d \n", dist[1]);
+//        printf(">>>>%d\n", i);
+        // 寻找当前最小的路径；
+        // 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。
+        min = INF;
+        for (j = 0; j < G->n; j++)
+        {
+            if (flag[j]==0 && dist[j]<min) // 没有走过的点，树状的 dist
+            {
+                min = dist[j];
+                k = j;
+            }
+        }
+        // 标记"顶点k"为已经获取到最短路径
+        flag[k] = 1;
+//        if(){
+//
+//        }
+//        js_obj->vex[useless] = vexs[k];
+//        useless++;
+        
+        
+        
+        
+        
+        // 修正当前最短路径和前驱顶点
+        // 即，当已经"顶点k的最短路径"之后，更新"未获取最短路径的顶点的最短路径和前驱顶点"。
+        for (j = 0; j < G->n; j++)
+        {
+            tmp = (G->edges[k][j]==INF ? INF : (min + G->edges[k][j])); // 防止溢出
+//            if(tmp  < dist[j] && j == p){
+//                js_obj->vex[useless] = vexs[k];
+//                useless++;
+//            }
+            if (flag[j] == 0 && (tmp  < dist[j]) )
+            {
+                if(j == p){
+                    js_obj->vex[useless] = vexs[k];
+                    useless++;
+                }
+                dist[j] = tmp;
+                prev[j] = k;
+            }
+        }
+    }
+    
+    
+//    int fuck = 5;
+//    while (fuck > 0) {
+//        if(fuck <= p && fuck >= j){
+//            printf("最终！ : %c \n", js_obj->vex[fuck]);
+//        }
+//        fuck--;
+//    }
+    // 打印dijkstra最短路径的结果
+    printf("dijkstra(%c): \n", G->vexs[vs]);
+    printf("%c 到 %c 的最短路径是", vexs[vs], vexs[p]);
+    for(i=0; i<useless; i++){
+        printf("%c", js_obj->vex[i]);
+    }
+    printf("%c", vexs[p]);
+    
+    for (i = 0; i < G->n; i++){
+        if(i == p){
+            printf("  shortest(%c, %c)=%d\n", G->vexs[vs], G->vexs[i], dist[i]);
+        }
+    }
+    
+}
+// 邻接矩阵
+//typedef struct _graph
+//{
+//    char vexs[MAX];       // 顶点集合
+//    int vexnum;           // 顶点数
+//    int edgnum;           // 边数
+//    int matrix[MAX][MAX]; // 邻接矩阵
+//}Graph, *PGraph;
+
+
+int recursion_flag[M];
+void abord_recursion(){
+    int i;
+    for(i=0; i<6; i++){ // 直接赋值了
+        recursion_flag[i] = 0;
+    }
+}
+
+
+int get_all_path(Mgraph *my_graph, int x, int y, char *str){ // 无责任获取两点之间所有路径
+    char str2[100];
+    int sLen;
+    
+    strcpy(str2, str);
+    sLen = strlen(str);
+    str2[sLen] = my_graph->vexs[x];
+    str2[sLen + 1] = '\0';
+    
+    int i;
+    if(x == y){ // find targe
+        printf("final -> %s \n", str2);
+        return 0;
+    }
+    
+    recursion_flag[x] = 1;
+    
+    for(i=0; i<6; i++){
+        if(my_graph->edges[x][i] > 0 && my_graph->edges[x][i] < INF && recursion_flag[i] != 1){
+            get_all_path(my_graph, i, y, str2);
+        }
+    }
+   
+    return 0;
+}
+
+
 /*
  * 用户 GUI 选择界面
  */
 int menu() {
-    int inputNum = 0;
+    int inputNum = 10;
     printf("******* GUI 选择界面 *******\n");
     printf("        A \n");
-    printf("        | \n");
+    printf("       1|  5   6 \n");
     printf("        B —— E —— F\n");
-    printf("        |    |\n");
+    printf("       3|    |4\n");
     printf("        C —— D\n");
+    printf("          2\n");
     puts("1、显示所有节点信息\n");
     puts("2、查询各个景点的相关信息\n");
     puts("3、查询任意两个景点的最短路径\n");
@@ -201,83 +365,10 @@ int menu() {
 }
 
 
-
-// 邻接矩阵
-//typedef struct _graph
-//{
-//    char vexs[MAX];       // 顶点集合
-//    int vexnum;           // 顶点数
-//    int edgnum;           // 边数
-//    int matrix[MAX][MAX]; // 邻接矩阵
-//}Graph, *PGraph;
-
-void dijkstra(Mgraph *G, int vs, int p, int prev[], int dist[]){
-    int i,j,k;
-    int min;
-    int tmp;
-    int flag[MAX];      // flag[i]=1表示"顶点vs"到"顶点i"的最短路径已成功获取。
-    
-    // 初始化
-    for (i = 0; i < G->n; i++)
-    {
-        flag[i] = 0;              // 顶点i的最短路径还没获取到。
-        prev[i] = 0;              // 顶点i的前驱顶点为0。
-        dist[i] = G->edges[vs][i];// 顶点i的最短路径为"顶点vs"到"顶点i"的权。
-    }
-    
-    // 对"顶点vs"自身进行初始化
-    flag[vs] = 1;
-    dist[vs] = 0;
-    
-    // 遍历G.vexnum-1次；每次找出一个顶点的最短路径。
-    for (i = 1; i < G->n; i++)
-    {
-        // 寻找当前最小的路径；
-        // 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。
-        min = INF;
-        for (j = 0; j < G->n; j++)
-        {
-            if (flag[j]==0 && dist[j]<min)
-            {
-                min = dist[j];
-                k = j;
-            }
-        }
-        // 标记"顶点k"为已经获取到最短路径
-        flag[k] = 1;
-        
-        // 修正当前最短路径和前驱顶点
-        // 即，当已经"顶点k的最短路径"之后，更新"未获取最短路径的顶点的最短路径和前驱顶点"。
-        for (j = 0; j < G->n; j++)
-        {
-            tmp = (G->edges[k][j]==INF ? INF : (min + G->edges[k][j])); // 防止溢出
-            if (flag[j] == 0 && (tmp  < dist[j]) )
-            {
-                dist[j] = tmp;
-                prev[j] = k;
-            }
-        }
-    }
-    
-    // 打印dijkstra最短路径的结果
-    printf("dijkstra(%c): \n", G->vexs[vs]);
-    for (i = 0; i < G->n; i++)
-        printf("  shortest(%c, %c)=%d\n", G->vexs[vs], G->vexs[i], dist[i]);
-}
-// 邻接矩阵
-//typedef struct _graph
-//{
-//    char vexs[MAX];       // 顶点集合
-//    int vexnum;           // 顶点数
-//    int edgnum;           // 边数
-//    int matrix[MAX][MAX]; // 邻接矩阵
-//}Graph, *PGraph;
-
-
 int main() {
+    Mgraph my_graph;
     int prev[MAX] = {0}; // 还没想好等下 吧
     int dist[MAX] = {0}; // 用于 dijkstra 输出存储
-    Mgraph *my_graph;
     char file_Path[] = "/Users/yaokangpeng/Documents/CODE/DataStructure_mission/DataStructure_mission/School_map.txt";
     init_school_sequence_head();
     create(&my_graph, file_Path);
@@ -298,6 +389,13 @@ int main() {
                 scanf("%d %d", &i,&p);
                 getchar();
                 dijkstra(&my_graph, i, p, prev, dist);
+                break;
+            case 4:
+                abord_recursion();
+                puts("输入你想查询 所有路径的两个点的 index （ 用空格隔开 ）");
+                scanf("%d %d", &i,&p);
+                getchar();
+                get_all_path(&my_graph,i,p, "");
                 break;
             case 0:
                 puts("退出程序ing");
