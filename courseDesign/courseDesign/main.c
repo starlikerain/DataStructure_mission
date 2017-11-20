@@ -182,17 +182,6 @@ void school_spot_display() {
     }
 }
 
-
-
-// 邻接矩阵
-//typedef struct _graph
-//{
-//    char vexs[MAX];       // 顶点集合
-//    int vexnum;           // 顶点数
-//    int edgnum;           // 边数
-//    int matrix[MAX][MAX]; // 邻接矩阵
-//}Graph, *PGraph;
-
 void dijkstra(Mgraph *G, int vs, int p, int prev[], int dist[]){
     char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
     js_Obj* js_obj;
@@ -295,14 +284,7 @@ void dijkstra(Mgraph *G, int vs, int p, int prev[], int dist[]){
     }
     
 }
-// 邻接矩阵
-//typedef struct _graph
-//{
-//    char vexs[MAX];       // 顶点集合
-//    int vexnum;           // 顶点数
-//    int edgnum;           // 边数
-//    int matrix[MAX][MAX]; // 邻接矩阵
-//}Graph, *PGraph;
+
 
 
 int recursion_flag[M];
